@@ -3,7 +3,7 @@
 #
 
 ---
-- hosts: all
+- hosts: default
   remote_user: root
 
   vars_files:
@@ -13,8 +13,12 @@
 
     - hostname: name={{ server_hostname }}
 
+    - apt: pkg=python-apt state=installed
+    - apt: pkg=python-pycurl state=installed
+#    - apt: pkg=python-mysqldb state=installed
+
     - apt_key: url=http://debian.aegirproject.org/key.asc state=present
-    - apt_repository: repo='deb http://archive.canonical.com/ubuntu hardy partner' state=present
+    - apt_repository: repo='deb http://debian.aegirproject.org stable main' state=present update_cache=yes
 
     - include: tasks/mysql-secure.yml
 
