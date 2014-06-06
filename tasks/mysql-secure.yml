@@ -5,11 +5,12 @@
 # Distribution independent.
 #
 
-- name: Setup | Install required packages.
+- name: MySQL | Install MySQL
   action: apt pkg={{ item }} state=installed
   with_items:
     - mysql-server
     - mysql-client
+    - python-mysqldb
 
 - name: MySQL | Set the root password.
   action: mysql_user user=root password={{ mysql_root_password }} host=localhost
