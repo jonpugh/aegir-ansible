@@ -1,0 +1,24 @@
+##
+# Aegir Server
+#
+
+---
+- hosts: default
+  user: root
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+
+    - hostname: name={{ server_hostname }}
+
+    - apt_key: url=http://debian.aegirproject.org/key.asc state=present
+    - apt_repository: repo='deb http://archive.canonical.com/ubuntu hardy partner' state=present
+
+    - include: tasks/mysql-secure.yml
+
+    - name: Setup | Install required packages.
+      action: apt pkg={{ item }} state=installed
+      with_items:
+        - aegir2
