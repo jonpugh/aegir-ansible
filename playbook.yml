@@ -15,7 +15,6 @@
 
     - apt: pkg=python-apt state=installed
     - apt: pkg=python-pycurl state=installed
-#    - apt: pkg=python-mysqldb state=installed
 
     - apt_key: url=http://debian.aegirproject.org/key.asc state=present
     - apt_repository: repo='deb http://debian.aegirproject.org stable main' state=present update_cache=yes
